@@ -28,4 +28,4 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-           az storage file upload-batch --account-name rg1 --destination newfolder --destination-path folder1/newfolder --source ./src
+           az storage blob upload-batch --account-name rg1 --destination dev --destination-path https://rg1.blob.core.windows.net/dev --source ./src
