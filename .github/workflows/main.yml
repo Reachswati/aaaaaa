@@ -1,0 +1,30 @@
+# This workflow pics file from local repo and pushes it to azure storage.
+
+name: azure file upload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:  
+
+  upload-iles-in-dev:
+    runs-on : ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+        
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure storage file upload
+      uses: azure/cli@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az storage file upload-batch storage account-name rg1 --destination --destination-path --source ./src
